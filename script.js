@@ -1,26 +1,32 @@
-setTimeout(()=> {
-    console.log('üllatus');
-}, 10_000);
+console.log(window, {document});
+let heading = document.querySelector('h1');
+console.log({heading});
+heading.innerText = "gigigogo";
 
-console.log('ühtegi üllatust ei tule');
-
-setInterval(() => {
-    console.log('mimi');
-}, 10_000 );
-
-let answer = fetch('http://127.0.0.1:5500/').then(response => {
-    return response.text();
-}).then(text => {
-    console.log(text);
-});
-
-console.log(answer);
-
-async function getText(){
-let response = await fetch('http://127.0.0.1:5500/');
-console.log(response);
-let text = await response.text();
-console.log(text); 
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
-await getText();
+let button = document.querySelector('button');
+button.addEventListener('click', event => {
+    console.log(event);
+    heading.innerText = "gogogigi";
+    heading.style.color = getRandomColor();
+    document.documentElement.style.background = getRandomColor();
+    document.body.style.background = getRandomColor();
+});
+
+setInterval(() => {
+        document.documentElement.style.background = getRandomColor();
+}, 10_000)
+
+let input = document.querySelector('input');
+input.addEventListener('input', event => {
+    console.log(event);
+    heading.innerText = input.value.split('').reverse().join('');
+})
