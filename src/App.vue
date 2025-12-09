@@ -1,13 +1,16 @@
 <script setup>
 import { ref } from 'vue';
 import Tabs from './components/Tabs.vue';
+
+import ToDo from './pages/ToDo.vue'
+import Modals from './pages/Modals.vue'
+
+
 let activeTab= ref(0);
-let titles= ref(['Pictures', 'Music', 'Videos', 'Documents'])
+let titles= ref(['ToDo', 'Modals'])
 let contents = ref([
-  'wonderful Pictures',
-  'wonderful Music',
-  'wonderful Videos',
-  'wonderful Documents'
+  ToDo,
+  Modals
 ])
 
 function setTab(index){
@@ -17,8 +20,6 @@ function setTab(index){
 
 <template>
 <Tabs :active="activeTab" :titles="titles" @change="setTab"> </Tabs>
-<div class="container content">
-  <h1>{{ contents[activeTab] }}</h1>
-</div>
+<component :is="contents[activeTab]"> </component>
 
 </template>
