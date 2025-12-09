@@ -1,20 +1,24 @@
 <script setup>
 import { ref } from 'vue';
-import modal from './components/Modal.vue';
+import Tabs from './components/Tabs.vue';
+let activeTab= ref(0);
+let titles= ref(['Pictures', 'Music', 'Videos', 'Documents'])
+let contents = ref([
+  'wonderful Pictures',
+  'wonderful Music',
+  'wonderful Videos',
+  'wonderful Documents'
+])
 
-
-let modal1Active = ref(false);
-let modal2Active = ref(false);
+function setTab(index){
+  activeTab.value = index;
+}
 </script>
 
 <template>
-  <div class="container mt-3">
-    <div class="content">
-      <button class="button is-primary" @click="modal1Active = true">Ava Modal 1</button>
-      <button class="button is-link" @click="modal2Active = true">Ava Modal 2</button>
-      
-      <modal :active="modal1Active" @close="modal1Active=false" url="https://picsum.photos/1280/960?random=1"></modal>
-      <modal :active="modal2Active" @close="modal2Active=false" url="https://picsum.photos/1280/960?random=2"></modal>
-    </div>
-  </div>
+<Tabs :active="activeTab" :titles="titles" @change="setTab"> </Tabs>
+<div class="container content">
+  <h1>{{ contents[activeTab] }}</h1>
+</div>
+
 </template>
