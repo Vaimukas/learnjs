@@ -1,5 +1,19 @@
 import { createApp } from "vue";
+import { createMemoryHistory, createWebHashHistory, createRouter } from "vue-router";
 
-import App from './App.vue';
+import Modals from "./pages/Modals.vue";
+import ToDo from "./pages/ToDo.vue";
 
-createApp(App).mount('#app')
+const routes = [
+  { path: "/", component: ToDo },
+  { path: "/modals", component: Modals },
+];
+
+export const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+});
+
+import App from "./App.vue";
+
+createApp(App).use(router).mount("#app");
